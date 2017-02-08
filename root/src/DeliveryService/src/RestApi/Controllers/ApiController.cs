@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DeliveryLib;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RestApi.Controllers
@@ -12,7 +13,8 @@ namespace RestApi.Controllers
         [HttpPost]
         public IActionResult SendMessage(string clientId, string message)
         {
-            throw new NotImplementedException();
+            var deliveryservice = new DeliveryMessage(clientId, message);
+            deliveryservice.SendMessageAsync(clientId, mesage)
         }
     }
 }

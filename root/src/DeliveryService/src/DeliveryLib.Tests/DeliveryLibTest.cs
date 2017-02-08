@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using NUnit.Framework;
 using DeliveryLib;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,12 @@ namespace DeliveryLib.Tests
         public void TestSpamMessage()
         {
             _service.SendMessageAsync("148460428", "test spam message", default(CancellationToken)).Wait();
+        }
+
+        [Test]
+        public void TestSpamMessageThrowException()
+        {
+            Assert.Throws<AggregateException>(() => _service.SendMessageAsync("", "test spam message", default(CancellationToken)).Wait());
         }
     }
 }

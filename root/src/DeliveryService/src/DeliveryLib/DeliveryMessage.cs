@@ -24,6 +24,12 @@ namespace DeliveryLib
             string apiUrl,
             string token)
         {
+            if (String.IsNullOrEmpty(apiUrl))
+                throw new ArgumentNullException(nameof(apiUrl));
+
+            if (String.IsNullOrEmpty(token))
+                throw new ArgumentNullException(nameof(token));
+
             _apiUrl = apiUrl;
             _token = token;
         }
