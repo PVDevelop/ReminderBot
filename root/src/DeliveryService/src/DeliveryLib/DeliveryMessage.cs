@@ -25,6 +25,7 @@ namespace DeliveryLib
             string token)
         {
             _apiUrl = apiUrl;
+            _token = token;
         }
 
         public async Task SendMessageAsync(string chatId, string message, CancellationToken cancellationToken)
