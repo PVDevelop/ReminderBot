@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using DeliveryLib;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RestApi.Controllers
@@ -10,9 +12,11 @@ namespace RestApi.Controllers
     public class ApiController : Controller
     {
         [HttpPost]
-        public IActionResult SendMessage(string clientId, string message)
+        public async Task<IActionResult> SendMessage(string clientId, string message)
         {
-            throw new NotImplementedException();
+            var deliveryservice = new DeliveryMessage(clientId, message);
+            await deliveryservice.SendMessageAsync(clientId, message, default(CancellationToken));
+            return Ok();
         }
     }
 }
