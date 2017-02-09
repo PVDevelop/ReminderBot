@@ -11,12 +11,26 @@ namespace DeliveryService
 {
     public class Program
     {
+        /// <summary>
+        /// </summary>
+        /// <param name="args">
+        /// args[0] - apiurl
+        /// args[1] - tokenapi
+        /// args[2] - hostname
+        /// args[3] - exchange
+        /// args[4] - routingkey
+        /// </param>
         public static void Main(string[] args)
         {
+            if (args.Length != 5)
+                throw new ArgumentException();
+
             var serviceProvider = new ServiceCollection()
-                .AddTransient<ILogger, Logger>()
-                .AddTransient<IService, Service>()
-                .AddTransient<IDeliveryMessage, DeliveryMessage>()
+                .AddSingleton<ILogger, Logger>()
+                .AddSingleton<IDeliveryMessage>(it => 
+                    new DeliveryMessage(args[0], args[1]))
+                .AddSingleton<IService>(it => 
+                    new Service(args[2], args[3], args[4], it.GetService<ILogger>(), it.GetService<IDeliveryMessage>()))
                 .BuildServiceProvider();
 
             var logger = serviceProvider.GetService<ILogger>();

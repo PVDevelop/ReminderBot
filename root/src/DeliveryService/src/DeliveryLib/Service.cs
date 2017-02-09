@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using DeliveryLib;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace DeliveryService
+namespace DeliveryLib
 {
     public class Service : IService
     {
@@ -42,7 +43,7 @@ namespace DeliveryService
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.ExchangeDeclare(_exchange, ExchangeType.Fanout);
+                channel.ExchangeDeclare(_exchange, ExchangeType.Direct);
 
                 var queueName = channel.QueueDeclare().QueueName;
                 channel.QueueBind(queue: queueName,
@@ -57,7 +58,11 @@ namespace DeliveryService
                         var body = ea.Body;
                         var message = Encoding.UTF8.GetString(body);
 
-                        _delivery.SendMessageAsync(message, message, token);
+                        _logger.LogMessage($"получил сообщение {message}", null);
+
+                        var obj = (dynamic)JsonConvert.DeserializeObject(message);
+
+                        _delivery.SendMessageAsync(obj["chat_id"].ToString(), obj["text"].ToString(), token);
                     }
                     catch(Exception ex)
                     {

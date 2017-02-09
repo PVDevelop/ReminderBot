@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DeliveryLib;
 using NLog;
+using NLog.Config;
+using NLog.Targets;
 
-namespace DeliveryService
+namespace DeliveryLib
 {
     public class Logger : ILogger
     {
         readonly NLog.ILogger _logger = null;
 
-
         public Logger()
         {
+            NLog.Config.SimpleConfigurator.ConfigureForTargetLogging(new ConsoleTarget());
             _logger = LogManager.GetLogger("Logger");
         }
 
