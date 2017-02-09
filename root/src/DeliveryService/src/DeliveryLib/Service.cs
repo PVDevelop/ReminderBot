@@ -63,15 +63,15 @@ namespace DeliveryLib
                         var obj = (dynamic)JsonConvert.DeserializeObject(message);
 
                         _delivery.SendMessageAsync(obj["chat_id"].ToString(), obj["text"].ToString(), token);
+                        channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                     }
                     catch(Exception ex)
                     {
                         _logger.LogError("При отправке сообщения произошла ошибка", ex);
                     }
-                    
                 };
                 channel.BasicConsume(queue: queueName,
-                                     noAck: true,
+                                     noAck: false,
                                      consumer: consumer);
 
                 while (!token.IsCancellationRequested)
