@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  deliveryservice:
+    image: user/deliveryservice${TAG}
+    build:
+      context: .
+      dockerfile: Dockerfile

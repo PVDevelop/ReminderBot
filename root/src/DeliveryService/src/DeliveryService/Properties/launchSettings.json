@@ -3,6 +3,7 @@
     "DeliveryService": {
       "commandName": "Project",
       "commandLineArgs": "https://api.telegram.org/bot 325834582:AAGbvJQ7oYH2E3HW4z_yqshRvu-jT53GOQc localhost pv.telegram.notification pv.telegram.notification "
-    }
+    },
+    "Docker": {}
   }
 }
