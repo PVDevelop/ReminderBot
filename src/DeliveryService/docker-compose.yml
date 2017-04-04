@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  deliveryservice:
+    environment:
+      - apiurl=https://api.telegram.org/bot
+      - tokenapi=325834582:AAGbvJQ7oYH2E3HW4z_yqshRvu-jT53GOQc
+      - connectionString=amqp://user:password@rabbitmq
+      - exchange=pv.telegram.notification
+      - routingkey=pv.telegram.notification
+    image: deliveryservice
+    build:
+      context: ./src/DeliveryService
+      dockerfile: Dockerfile
+    depends_on:
+      - "rabbitmq"
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    environment: 
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
