@@ -1,0 +1,31 @@
+{
+    "ok": true,
+    "result": [
+        {
+            "update_id": 10,
+            "message": {
+                "message_id": 1,
+                "from": {
+                    "id": 123,
+                    "first_name": "FirstName",
+                    "last_name": "SecondName"
+                },
+                "chat": {
+                    "id": 123,
+                    "first_name": "FirstName",
+                    "last_name": "SecondName",
+                    "type": "private"
+                },
+                "date": 1486094532,
+                "text": "/hi",
+                "entities": [
+                    {
+                        "type": "bot_command",
+                        "offset": 0,
+                        "length": 3
+                    }
+                ]
+            }
+        }
+    ]
+}
