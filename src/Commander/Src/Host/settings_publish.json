@@ -1,0 +1,10 @@
+﻿{
+    "ConnectionStrings": {
+        "RabbitMq": "amqp://user:password@rabbitmq:5672/",
+        "DataDirectory": "/app/data/commander"
+    },
+    "TelegramApiSettings": {
+        "HostAddress": "https://api.telegram.org",
+        "Token": "348485796:AAEEPGXp76GT8n--KKyHBS0tJEetOVSMF5o"
+    }
+}

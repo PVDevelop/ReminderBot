@@ -1,0 +1,10 @@
+﻿{
+    "ConnectionStrings": {
+        "RabbitMq": "amqp://localhost:5672/",
+        "DataDirectory": "c:/temp/reminder_bot/commander"
+    },
+    "TelegramApiSettings": {
+        "HostAddress": "https://api.telegram.org",
+        "Token": "327811531:AAGdjv2iRPoprrr5RiYnoFug9krUCK34aNo"
+    }
+}

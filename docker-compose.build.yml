@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  deliveryServiceBuild:
+    image: microsoft/dotnet
+    volumes:
+      - .:/bin/reminder
+    working_dir: /bin/reminder
+    command: bash ./build.sh

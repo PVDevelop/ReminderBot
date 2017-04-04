@@ -1,0 +1,10 @@
+﻿{
+    "ConnectionStrings": {
+        "RabbitMq": "amqp://localhost:5672/test_unknown_command",
+        "DataDirectory": "c:/temp/tests/commander/unknown_command"
+    },
+    "TelegramApiSettings": {
+        "HostAddress": "http://localhost:7000",
+        "Token": "1"
+    }
+}

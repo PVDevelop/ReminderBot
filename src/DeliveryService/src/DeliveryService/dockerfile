@@ -1,0 +1,6 @@
+FROM microsoft/dotnet
+ARG source
+WORKDIR /app
+COPY . .
+
+ENTRYPOINT dotnet DeliveryService.dll
