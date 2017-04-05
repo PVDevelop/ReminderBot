@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.12
+VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.Tests", "Tests\Microservice.Tests\Microservice.Tests.csproj", "{1A26F2EB-D14D-41AB-98B4-CCFE06CE0EA3}"
 EndProject
@@ -33,5 +33,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1A26F2EB-D14D-41AB-98B4-CCFE06CE0EA3} = {77818DDC-5DE8-4E1D-8FDC-32E09C1EB58A}
+		{7A937C37-1942-46D8-801F-9000EC25BEB7} = {6144438B-4172-4FEA-91A8-394C5603C6ED}
+		{73F4C100-336B-4F0C-9A36-96D6641A7146} = {6144438B-4172-4FEA-91A8-394C5603C6ED}
 	EndGlobalSection
 EndGlobal
