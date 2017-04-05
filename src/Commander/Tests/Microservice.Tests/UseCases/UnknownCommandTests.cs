@@ -1,30 +1,30 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Newtonsoft.Json;
-using NUnit.Framework;
 using PVDevelop.ReminderBot.Microservice.Logging;
+using Xunit;
 
 namespace PVDevelop.ReminderBot.Microservice.Tests.UseCases
 {
-    [TestFixture]
-    public class UnknownCommandTests
+    public class UnknownCommandTests : IDisposable
     {
         const string ExchangeName = "pv.telegram.message";
         const string ExchangeType = RabbitMQ.Client.ExchangeType.Direct;
         const string QueueName = "test";
         const string RoutingKey = "telegram";
 
-        [Test]
+        [Fact]
         public void UnknownCommand_SendsUnknownCommandMessageToMessageBus()
         {
             var getResult = _rmqHost.Get(QueueName);
 
-            Assert.NotNull(getResult, "Expected message has not been received.");
+            Assert.NotNull(getResult);
 
             var unknownCommandContent = DeserializeContent(getResult.Body);
 
             Assert.NotNull(unknownCommandContent);
-            Assert.AreEqual(123, unknownCommandContent.chat_id);
-            Assert.AreEqual("Неизвестная команда hi.", unknownCommandContent.text);
+            Assert.Equal(123, unknownCommandContent.chat_id);
+            Assert.Equal("Неизвестная команда hi.", unknownCommandContent.text);
         }
 
         private UnknownCommandContent DeserializeContent(byte[] body)
@@ -41,8 +41,7 @@ namespace PVDevelop.ReminderBot.Microservice.Tests.UseCases
         private TestHttpHost _httpHost;
         private TestRmqHost _rmqHost;
 
-        [SetUp]
-        public void Setup()
+        public UnknownCommandTests()
         {
             LoggerHelper.UseNLogger("nlog.config");
 
@@ -85,8 +84,7 @@ namespace PVDevelop.ReminderBot.Microservice.Tests.UseCases
             _microserviceContext.Start();
         }
 
-        [TearDown]
-        public void TearDown()
+        void IDisposable.Dispose()
         {
             _microserviceContext?.Dispose();
             _rmqHost?.Dispose();

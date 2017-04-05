@@ -1,24 +1,22 @@
 ﻿using System.Collections.Generic;
-using NUnit.Framework;
 using PVDevelop.ReminderBot.Microservice.Application;
 using PVDevelop.ReminderBot.Microservice.Application.Commands;
 using PVDevelop.ReminderBot.Microservice.Response;
+using Xunit;
 
 namespace PVDevelop.ReminderBot.Microservice.Tests.Application
 {
-    [TestFixture]
     public class ProcessMessageUpdatesCommandHandlerTests
     {
-        [Test]
+        [Fact]
         public void Handle_NullEntities_DoesNotThrowEsception()
         {
             var handler = new ProcessMessageUpdatesCommandHandler(new MessageBusStub());
 
             var command = new ProcessUpdateMessagesCommand(GetUpdatesWithNullEntities());
 
+            // если не упали, значит тест пройден
             handler.Handle(command);
-
-            Assert.Pass();
         }
 
         private IReadOnlyCollection<UpdateDto> GetUpdatesWithNullEntities()
@@ -37,7 +35,7 @@ namespace PVDevelop.ReminderBot.Microservice.Tests.Application
             };
         }
 
-        [Test]
+        [Fact]
         public void Handle_NullMessage_DoesNotThrowEsception()
         {
             var handler = new ProcessMessageUpdatesCommandHandler(new MessageBusStub());
@@ -50,9 +48,8 @@ namespace PVDevelop.ReminderBot.Microservice.Tests.Application
 
             var command = new ProcessUpdateMessagesCommand(new[] { updateDto });
 
+            // если не упали, знаит тест пройден
             handler.Handle(command);
-
-            Assert.Pass();
         }
     }
 }

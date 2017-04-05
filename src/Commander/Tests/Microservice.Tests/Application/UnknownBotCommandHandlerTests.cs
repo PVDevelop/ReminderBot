@@ -1,15 +1,14 @@
 ﻿using System.Linq;
-using NUnit.Framework;
 using PVDevelop.ReminderBot.Microservice.Application;
 using PVDevelop.ReminderBot.Microservice.Application.Commands;
 using PVDevelop.ReminderBot.Microservice.Application.MessageHeaders;
+using Xunit;
 
 namespace PVDevelop.ReminderBot.Microservice.Tests.Application
 {
-    [TestFixture]
     public class UnknownBotCommandHandlerTests
     {
-        [Test]
+        [Fact]
         public void Handle_SendsMessageWithDestination()
         {
             var messageBusStub = new MessageBusStub();
@@ -23,9 +22,9 @@ namespace PVDevelop.ReminderBot.Microservice.Tests.Application
             var sentMessage = messageBusStub.SentMessages.Single();
 
             object headerValue;
-            var b = sentMessage.Headers.TryGetHeader(DestinationMessageHeader.HeaderKey, out headerValue);
+            var hasHeader = sentMessage.Headers.TryGetHeader(DestinationMessageHeader.HeaderKey, out headerValue);
 
-            Assert.IsTrue(b);
+            Assert.True(hasHeader);
             Assert.IsAssignableFrom(typeof(DestinationMessageHeader), headerValue);
         }
     }
